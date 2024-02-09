@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{% endblock %}</title>
+  <!-- Bootstrap CSS CDN -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  
+  <link href="{{ asset('styles/style.css') }}" rel="stylesheet">
+</head>
+<body>
+    <header id="header">
+        <div class="row">
+            <div class="col-md-1 col-1 fakeHeader"></div>
+            <div class="col-md-6 col-6 webTitle h1">
+                <a href="/">Bookloggd</a>
+            </div>
+            <div class="col-md-4 col-4 btn">
+                Crear libro
+            </div>
+        </div>
+    </header>
+
+
+    <content class="content">
+        {% block content %}{% endblock %}
+    </content>
+
+    
+      
+
+
+    <footer>
+        <div class="row">
+            <div class="col-12"></div>
+            <div class="col-12"></div>
+        </div>
+    </footer>
+  <!-- Bootstrap JS CDN (opcional, si necesitas funcionalidades de JavaScript de Bootstrap) -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

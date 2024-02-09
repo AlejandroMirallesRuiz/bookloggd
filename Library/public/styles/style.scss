@@ -1,0 +1,169 @@
+body{
+    background-color: black;
+    color: white;
+
+    font-size: 1.2em;
+}
+
+header{
+    color:rgb(255, 196, 252);
+
+    padding-bottom: 1em;
+
+    .btn{ //Boostrap overrides its color
+        color:rgb(255, 196, 252) !important;
+    }
+    /*
+    div div{
+        border: 0.2em outset white;
+    }
+
+    .firstHeader, .fakeLastHeader{
+        border-left: none;
+    }
+
+    .fakeFirstHeader, .lastHeader{
+        border-right: none;
+    }
+
+    .fakeHeader{
+        border:none;
+    }
+    */
+
+    .webTitle{
+        color:rgb(0, 255, 85);
+    }
+
+    @media (max-width: 380px) {
+        .h1{
+            font-size: 2rem !important;
+        }
+    }
+    
+    @media (max-width: 310px) {
+        .h1{
+            font-size: 1.5rem !important;
+        }
+    }
+}
+
+
+
+.title{
+    font-size: 200%;
+
+    color: rgb(0, 255, 191);
+}
+
+/**Estados 
+        Deseado
+        Interés
+        Terminado
+        Leyendo
+        Stand-by
+        Droppeado
+    */
+$deseado: rgb(255, 196, 0);
+$interes: rgba(255, 139, 45, 0.904);
+$terminado: rgb(61, 139, 255);
+$leyendo: rgb(84, 255, 50);
+$stand-by: rgb(255, 60, 118);
+$droppeado: rgb(255, 0, 0);
+
+.estado{
+    .estadoName{
+        display: none;
+    }
+    #title:hover{
+        + .estadoName{
+            display: inline-block;
+        }
+    }
+    
+    .circulo {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%; /* Hace que el div sea un círculo */
+        display: inline-block; /* Para que el círculo se muestre en línea con el texto */
+    }
+}
+
+.deseado{
+    color: $deseado;
+
+    .circulo{
+        background-color: $deseado;
+    }
+}
+.interes{
+    color: $interes;
+
+    .circulo{
+        background-color: $interes;
+    }
+}
+.terminado{
+    color: $terminado;
+
+    .circulo{
+        background-color: $terminado;
+    }
+}
+.leyendo{
+    color: $leyendo;
+
+    .circulo{
+        background-color: $leyendo;
+    }
+}
+.standby{
+    color: $stand-by;
+
+    .circulo{
+        background-color: $stand-by;
+    }
+}
+.droppeado{
+    color: $droppeado;
+
+    .circulo{
+        background-color: $droppeado;
+    }
+}
+
+
+
+
+
+.bookGalery, .showBook{
+    padding: 0.5em;
+    
+    vertical-align: none;
+}
+
+
+.bookDetails{
+    font-size: 2em;
+    
+    @media (max-width:700px) {
+        font-size: 1.5em;
+    }
+
+    @media (max-width:400px) {
+        font-size: 1em;
+    }
+
+}
+
+.table{
+    color:white
+}
+
+.titleBookUpdated{
+    color:rgb(186, 250, 255);
+}
+
+footer{
+    padding-top: 5em;
+}

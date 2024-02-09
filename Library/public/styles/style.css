@@ -1,0 +1,143 @@
+@charset "UTF-8";
+body {
+  background-color: black;
+  color: white;
+  font-size: 1.2em;
+}
+
+header {
+  color: rgb(255, 196, 252);
+  padding-bottom: 1em;
+  /*
+  div div{
+      border: 0.2em outset white;
+  }
+
+  .firstHeader, .fakeLastHeader{
+      border-left: none;
+  }
+
+  .fakeFirstHeader, .lastHeader{
+      border-right: none;
+  }
+
+  .fakeHeader{
+      border:none;
+  }
+  */
+}
+header .btn {
+  color: rgb(255, 196, 252) !important;
+}
+header .webTitle {
+  color: rgb(0, 255, 85);
+}
+@media (max-width: 380px) {
+  header .h1 {
+    font-size: 2rem !important;
+  }
+}
+@media (max-width: 310px) {
+  header .h1 {
+    font-size: 1.5rem !important;
+  }
+}
+
+.title {
+  font-size: 200%;
+  color: rgb(0, 255, 191);
+}
+
+/**Estados 
+        Deseado
+        Interés
+        Terminado
+        Leyendo
+        Stand-by
+        Droppeado
+    */
+.estado .estadoName {
+  display: none;
+}
+.estado #title:hover + .estadoName {
+  display: inline-block;
+}
+.estado .circulo {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%; /* Hace que el div sea un círculo */
+  display: inline-block; /* Para que el círculo se muestre en línea con el texto */
+}
+
+.deseado {
+  color: rgb(255, 196, 0);
+}
+.deseado .circulo {
+  background-color: rgb(255, 196, 0);
+}
+
+.interes {
+  color: rgba(255, 139, 45, 0.904);
+}
+.interes .circulo {
+  background-color: rgba(255, 139, 45, 0.904);
+}
+
+.terminado {
+  color: rgb(61, 139, 255);
+}
+.terminado .circulo {
+  background-color: rgb(61, 139, 255);
+}
+
+.leyendo {
+  color: rgb(84, 255, 50);
+}
+.leyendo .circulo {
+  background-color: rgb(84, 255, 50);
+}
+
+.standby {
+  color: rgb(255, 60, 118);
+}
+.standby .circulo {
+  background-color: rgb(255, 60, 118);
+}
+
+.droppeado {
+  color: rgb(255, 0, 0);
+}
+.droppeado .circulo {
+  background-color: rgb(255, 0, 0);
+}
+
+.bookGalery, .showBook {
+  padding: 0.5em;
+  vertical-align: none;
+}
+
+.bookDetails {
+  font-size: 2em;
+}
+@media (max-width: 700px) {
+  .bookDetails {
+    font-size: 1.5em;
+  }
+}
+@media (max-width: 400px) {
+  .bookDetails {
+    font-size: 1em;
+  }
+}
+
+.table {
+  color: white;
+}
+
+.titleBookUpdated {
+  color: rgb(186, 250, 255);
+}
+
+footer {
+  padding-top: 5em;
+}/*# sourceMappingURL=style.css.map */
