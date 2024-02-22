@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Update Status Reading {% endblock %}
+
+{% block content %}
+    
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-11 deseado">
+            <span class="h1">Deseado</span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-12 col-md-5 text-center">
+            <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1566425108i/33.jpg" class="book"/>
+        </div>
+        <div class="col-12 col-md-5">
+            <form action="#">
+                <div class="form-row">
+                    <div class="col-12 form-group text-center">
+                        <span class="h2 titleBookUpdated"> Señor de los anillos</span>
+                        <input type="text" class="form-control" id="titleBook" value="Señor de los anillos" hidden required disabled>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-12 col-md-12 form-group">
+                        <label for="languageInput">Estado</label>
+                        <select class="form-control" id="languageInput">
+                            <option value="">Deseado</option>
+                            <option value="">Interés</option>
+                            <option value="">Terminado</option>
+                            <option value="">Leyendo</option>
+                            <option value="">Stand-by</option>                                      
+                            <option value="">Droppeado</option>
+                        </select>
+                    </div>    
+                </div>
+                    
+                <div class="form-row">
+                    <div class="col-12 col-md-6 form-group">
+                        <label for="startDateInput">Fecha de comienzo</label>
+                        <input type="date" class="form-control" id="startDateInput">
+                    </div>
+                    <div class="col-12 col-md-6 form-group">
+                        <label for="finishedDateInput">Fecha de finalización</label>
+                        <input type="date" class="form-control" id="finishedDateInput">
+                    </div>      
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+
+    
