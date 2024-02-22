@@ -35,7 +35,7 @@ class Libro
     #[ORM\JoinColumn(nullable: false)]
     private ?Language $lengua = null;
 
-    #[ORM\OneToMany(targetEntity: Lectura::class, mappedBy: 'Libro', orphanRemoval: true)]
+    #[ORM\OneToOne(targetEntity: Lectura::class, mappedBy: 'Libro', orphanRemoval: true)]
     private Collection $lectura;
 
     public function __construct()
