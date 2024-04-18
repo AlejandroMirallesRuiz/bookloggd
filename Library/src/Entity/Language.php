@@ -21,6 +21,9 @@ class Language
     #[ORM\OneToMany(targetEntity: Libro::class, mappedBy: 'lengua')]
     private Collection $libros;
 
+    #[ORM\Column(length: 10)]
+    private ?string $acronym = null;
+
     public function __construct()
     {
         $this->libros = new ArrayCollection();
@@ -69,6 +72,18 @@ class Language
                 $libro->setLengua(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAcronym(): ?string
+    {
+        return $this->acronym;
+    }
+
+    public function setAcronym(string $acronym): static
+    {
+        $this->acronym = $acronym;
 
         return $this;
     }
