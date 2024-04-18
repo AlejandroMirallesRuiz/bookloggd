@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Update Book {% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-12 col-md-10 ">
+            <div class="col-1"></div>
+            <div class="col-11 col-md-12 ">
+                <div id="title" class="h1 title">Crear Idioma</div>
+            </div>
+
+            <div class="col-12">
+                <form action="/createLanguage" method="POST">
+                    <div class="form-row">
+                        <div class="col-12 col-md-6 form-group">
+                            <label for="languageInput">Idioma</label>
+                            <input name="language" type="text" class="form-control" id="languageInput" placeholder="Nombre del Idioma" required>
+                        </div>
+                        <div class="col-12 col-md-6 form-group">
+                           <label for="acronymInput">Acronimo</label>
+                            <input name="acronym" type="text" class="form-control" id="acronymInput" placeholder="Acronimo del Idioma" required>
+                        </div>      
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
+                </form>
+            </div>
+                
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+{% endblock %}
+
+
+
+
+
+    
