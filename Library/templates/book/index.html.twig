@@ -16,8 +16,9 @@
                 </div>
 
                 <div class="col-12 col-md-12 " id="bookGalerys">
-                    {% for book in books %}
-                        <img src="{{ asset('image/LoRTolkien.jpg') }}" class="bookGalery"/>
+                    {% for i in 0..(images|length - 1) %}
+                        <img src="{{ asset('image/' ~ images[i]) }}" class="bookGalery"/>
+                        <!-- <a href="book/{{ books[i].getId() }}"> Link </a> <-->
                     {% endfor %}
                 </div>
             </div>

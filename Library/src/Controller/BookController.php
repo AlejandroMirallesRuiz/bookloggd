@@ -49,18 +49,26 @@ class BookController extends AbstractController
     
     # Falta lógica 1
     #[Route('/', name: 'app_index')]
-    public function index(LibroRepository $libroRepository): Response{
+    public function index(LibroRepository $libroRepository, Request $request): Response{
         # Get all books
         $books = $libroRepository->findAll();
 
-        foreach ( $books as  $book){
-            echo "1";
+        $images = [];
+
+        # Save book image
+        $imagesFolder = "../public/image/";
+        foreach ($books as $book){
+            $book_id = $book->getId();
+
+            $imageName = $book_id . ".jpeg";
+            file_put_contents($imagesFolder . $imageName, $book->getPortada());
+            $images[] = $imageName;
         }
-        # Save all books images
 
         return $this->render('book/index.html.twig', [
             'controller_name' => 'BookController',
-            'books' => $books
+            'books' => $books,
+            'images' => $images
         ]);
     }
 
