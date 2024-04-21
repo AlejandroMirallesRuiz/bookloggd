@@ -35,12 +35,12 @@ class Libro
     #[ORM\JoinColumn(nullable: false)]
     private ?Language $lengua = null;
 
-    #[ORM\OneToOne(targetEntity: Lectura::class, mappedBy: 'Libro', orphanRemoval: true)]
-    private Collection $lectura;
+    #[ORM\OneToOne(mappedBy: 'book', cascade: ['persist', 'remove'])]
+    private ?Lectura $lectura = null;
 
     public function __construct()
     {
-        $this->lectura = new ArrayCollection();
+        #$this->lectura = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -120,33 +120,21 @@ class Libro
         return $this;
     }
 
-    /**
-     * @return Collection<int, Lectura>
-     */
-    public function getLectura(): Collection
+    public function getLectura(): ?Lectura
     {
         return $this->lectura;
     }
 
-    public function addLectura(Lectura $lectura): static
+    public function setLectura(Lectura $lectura): static
     {
-        if (!$this->lectura->contains($lectura)) {
-            $this->lectura->add($lectura);
-            $lectura->setLibro($this);
+        // set the owning side of the relation if necessary
+        if ($lectura->getBook() !== $this) {
+            $lectura->setBook($this);
         }
+
+        $this->lectura = $lectura;
 
         return $this;
     }
 
-    public function removeLectura(Lectura $lectura): static
-    {
-        if ($this->lectura->removeElement($lectura)) {
-            // set the owning side to null (unless already changed)
-            if ($lectura->getLibro() === $this) {
-                $lectura->setLibro(null);
-            }
-        }
-
-        return $this;
-    }
 }

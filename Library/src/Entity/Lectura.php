@@ -23,9 +23,9 @@ class Lectura
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $FechaFinal = null;
 
-    #[ORM\OneToOne(inversedBy: 'lectura')]
+    #[ORM\OneToOne(inversedBy: 'lectura', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Libro $Libro = null;
+    private ?Libro $book = null;
 
     public function getId(): ?int
     {
@@ -68,14 +68,14 @@ class Lectura
         return $this;
     }
 
-    public function getLibro(): ?Libro
+    public function getBook(): ?Libro
     {
-        return $this->Libro;
+        return $this->book;
     }
 
-    public function setLibro(?Libro $Libro): static
+    public function setBook(Libro $book): static
     {
-        $this->Libro = $Libro;
+        $this->book = $book;
 
         return $this;
     }
