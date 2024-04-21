@@ -90,7 +90,7 @@ class BookController extends AbstractController
 
     # Create book
     #[Route('/createBook', methods: ['POST'],  name: 'post_createBook')]
-    public function post_createBook(Request $request, LanguageRepository $languageRepository): Response{
+    public function post_createBook(Request $request, LanguageRepository $languageRepository, EntityManagerInterface $entityManager): Response{
         $title = $request->request->get('title');
         $author = $request->request->get('author');
         $editorial = $request->request->get('editorial');
@@ -101,12 +101,10 @@ class BookController extends AbstractController
 
         # Language
         $languageName = $request->request->get('language');
-        $language = $languageRepository->findOneBy(['name' => $languageName]);
+        $language = $languageRepository->findOneBy(['acronym' => $languageName]);
         
         # Front page
         $frontPage = $request->files->get('frontPage')->getContent(); # tmp_name = Path where its stored the image
-        
-        # dd($language);
 
         $book = new Libro();
         $book->setTitulo($title);
@@ -118,14 +116,15 @@ class BookController extends AbstractController
 
         $book->setPortada($frontPage);
 
-
         // tell Doctrine you want to (eventually) save the Product (no queries yet)
-        # $entityManager->persist($product);
+        $entityManager->persist($book);
+
 
         // actually executes the queries (i.e. the INSERT query)
-        # $entityManager->flush();
+        $entityManager->flush();
         
-        return new Response('Saved new product with id '.$book->getFechaPublicacion()->format('Y-m-d'));
+        
+        return new Response('Saved new product with id '.$book->getId());
     }
 
     #[Route('/updateBook/{bookId}', methods: ['GET'],  name: 'app_updateBook')]
@@ -179,7 +178,7 @@ class BookController extends AbstractController
         ]);
     }
 
-    # Create book
+    # Create language
     #[Route('/createLanguage', methods: ['POST'],  name: 'post_createLanguage')]
     public function post_createLanguage(Request $request, EntityManagerInterface $entityManager): Response{
         # Language
@@ -199,5 +198,18 @@ class BookController extends AbstractController
         $entityManager->flush();
         
         return new Response('Saved new language with name '.$language->getName() . " and id " . $language->getId());
+    }
+
+    #[Route('/getLanguages', name: 'getLanguages')]
+    public function getLanguages(LanguageRepository $languageRepository): Response{
+        # Language
+        $result = "";
+
+        foreach ($languageRepository->findAll() as $language){
+            $languageInfo = "1 " . $language->getName() . "_" . $language->getAcronym() . " (" . $language->getId() . ")" ;
+            $result .= "\n" . $languageInfo;
+        } 
+        
+        return new Response($result);
     }
 }

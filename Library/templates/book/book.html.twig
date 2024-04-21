@@ -6,8 +6,8 @@
     <div class="row">
                     <div class="col-md-1"></div>
                     <div class="col-md-11 estado deseado">
-                        <span id="title" class="h1"><span class="circulo"></span>Título libro</span>
-                        <span class="estadoName h5">Deseado</span>
+                        <span id="title" class="h1"><span class="circulo"></span>{% book.getTitulo() %}</span>
+                        <span class="estadoName h5">{% status.getStatus() %}</span>
                     </div>
                 </div>
                 <div class="row media">
@@ -19,45 +19,21 @@
 
 
                     <div class="col-12 col-md-5 media-body align-self-center bookDetails">
-                    <!--
-                        <div class="row">
-                            <div class="col-md-7">
-                                Tolkien
-                            </div>
-                            <div class="col-md-5">
-                                1928
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-7">
-                                Editorial random
-                            </div>
-                            <div class="col-md-5">
-                                Español
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 text-center">
-                                Prehistoria-Futuro
-                            </div>
-                        </div>
-                    </div>
-                -->
+                    
                         <table class="table">
                             <tbody>
                                 <tr>
-                                    <td>Autor Tolkien</td>
-                                    <td>1928</td>
+                                    <td>{% book.getAutor() %}</td>
+                                    <td>{% book.getFechaPublicacion() %}</td>
                                 </tr>
                                 
                                 <tr>
-                                    <td>Editorial random</td>
-                                    <td>Español</td>
+                                    <td>{% book.getEditorial() %}</td>
+                                    <td>{% book.getLengua().getName() %}</td>
                                 </tr>
 
                                 <tr>
-                                    <td colspan="2" class="text-center">Prehistoria-Eternidad</td>
-                                    
+                                    <td colspan="2" class="text-center">{% status.getFechaComienzo() %}-{% status.getFechaFinal() %}</td>
                                 </tr>
                             </tbody>
                         </table>
