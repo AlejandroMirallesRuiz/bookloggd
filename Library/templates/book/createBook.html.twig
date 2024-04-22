@@ -37,9 +37,9 @@
                         <div class="col-12 col-md-6 form-group">
                             <label for="languageInput">Idioma</label>
                             <select name="language" class="form-control" id="languageInput">
-                                <option value="ES">Español</option>
-                                <option value="EN">Inglés</option>
-                                <option value="CAT">Catalán</option>
+                                {% for language in languages %}
+                                    <option value="{{ language.acronym }}">{{language.name}}</option>
+                                {% endfor %}
                             </select>
                         </div>    
                     </div>

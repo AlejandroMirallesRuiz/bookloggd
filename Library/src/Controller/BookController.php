@@ -22,32 +22,17 @@ class BookController extends AbstractController
 {
 
     private function saveImageTemporalFile($image, $fileName = "temporal"){
-        // Genera un nombre único para la imagen
-        
-        // Generate new unique name
-        // $originalFilename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
-        // $newFilename = $originalFilename.'-'.uniqid().'.'.$image->guessExtension();
+        $imagesFolder = $this->getParameter('kernel.project_dir').'/public/image/';
 
-        $fileName = $fileName . '.' . $image->guessExtension();
+        $fileName = $fileName . ".jpg";
 
-        // Define el directorio de destino
-        $destination = $this->getParameter('kernel.project_dir').'/public/uploads/images/';
+        file_put_contents($imagesFolder . $fileName, $image);
 
-        // Mueve la imagen al directorio de destino
-        $image->move(
-            $destination,
-            $fileName
-        );
-
-        // Aquí puedes guardar la información de la imagen en la base de datos si es necesario
-        //Para obtener los datos en formato blob hay que hacer file_get_contents($image->getPathname());
-
-        return $image;
+        return $fileName;
     }
     
 
     
-    # Falta lógica 1
     #[Route('/', name: 'app_index')]
     public function index(LibroRepository $libroRepository, Request $request): Response{
         # Get all books
@@ -56,13 +41,13 @@ class BookController extends AbstractController
         $images = [];
 
         # Save book image
-        $imagesFolder = "../public/image/";
         foreach ($books as $book){
+            $image = $book->getPortada();
             $book_id = $book->getId();
 
-            $imageName = $book_id . ".jpeg";
-            file_put_contents($imagesFolder . $imageName, $book->getPortada());
-            $images[] = $imageName;
+            $imageFile = $this->saveImageTemporalFile($image, $book_id );
+            
+            $images[] = $imageFile;
         }
 
         return $this->render('book/index.html.twig', [
@@ -74,11 +59,12 @@ class BookController extends AbstractController
 
     # Falta lógica 1
     #[Route('/book/{bookId}', name: 'app_book')]
-    public function book(int $bookId): Response{
-        $book = Libro.getById($bookId);
+    public function book(int $bookId, LibroRepository $libroRepository): Response{
+        $book = $libroRepository->find($bookId);
         $status = $book.getLectura()[0]; #We only care about the first result
 
         # Save book image
+        saveImageTemporalFile($book->getPortada());
 
         return $this->render('book/book.html.twig', [
             'controller_name' => 'BookController',
@@ -89,10 +75,13 @@ class BookController extends AbstractController
 
     # Create book form
     #[Route('/createBook', methods: ['GET'],  name: 'app_createBook')]
-    public function createBook(): Response{
+    public function createBook(LanguageRepository $languageRepository): Response{
+
+        $languages = $languageRepository->findAll();
 
         return $this->render('book/createBook.html.twig', [
             'controller_name' => 'BookController',
+            'languages' => $languages
         ]);
     }
 
@@ -123,6 +112,9 @@ class BookController extends AbstractController
         $book->setLengua($language);
 
         $book->setPortada($frontPage);
+
+        $lectura = new Lectura();
+        $book->setLectura($lectura);
 
         // tell Doctrine you want to (eventually) save the Product (no queries yet)
         $entityManager->persist($book);
