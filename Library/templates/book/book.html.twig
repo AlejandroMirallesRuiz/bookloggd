@@ -4,41 +4,51 @@
 
 {% block content %}
     <div class="row">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-11 estado deseado">
-                        <span id="title" class="h1"><span class="circulo"></span>{% book.getTitulo() %}</span>
-                        <span class="estadoName h5">{% status.getStatus() %}</span>
-                    </div>
-                </div>
-                <div class="row media">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-5 col-12 mr-3 text-center">
-                        <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1566425108i/33.jpg" class="book"/>
-                    </div>
-
-
-
-                    <div class="col-12 col-md-5 media-body align-self-center bookDetails">
-                    
-                        <table class="table">
-                            <tbody>
-                                <tr>
-                                    <td>{% book.getAutor() %}</td>
-                                    <td>{% book.getFechaPublicacion() %}</td>
-                                </tr>
-                                
-                                <tr>
-                                    <td>{% book.getEditorial() %}</td>
-                                    <td>{% book.getLengua().getName() %}</td>
-                                </tr>
-
-                                <tr>
-                                    <td colspan="2" class="text-center">{% status.getFechaComienzo() %}-{% status.getFechaFinal() %}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div class="col-md-1"></div>
+        <div class="col-md-1"></div>
+        <div class="col-md-11 estado {{ status.status|lower }}">
+            <span id="title" class="h1"><span class="circulo"></span>{{ book.titulo }}</span>
+            <span class="estadoName h5">{{ status.status }}</span>
+        </div>
     </div>
+    <div class="row media mt-3">
+        <div class="col-md-1"></div>
+        <div class="col-md-5 col-12 mr-3 text-center">
+            <img src="{{ asset('image/' ~ image) }}" class="book"/>
+        </div>
+
+
+
+        <div class="col-12 col-md-5 media-body align-self-center bookDetails">
+                    
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td>{{ book.autor }}</td>
+                        <td>{{ book.fechaPublicacion|date("d/m/Y") }}</td>
+                    </tr>
+                            
+                    <tr>
+                        <td>{{ book.editorial}}</td>
+                        <td>{{ book.Lengua.name() }}</td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2" class="text-center">{{ status.fechaComienzo|date("d/m/Y") }}-{{ status.fechaFinal|date("d/m/Y") }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-md-1"></div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-md-6 col-6 text-center">
+            <a class="btn btn-primary">Actualizar lectura</a>
+        </div>
+        <div class="col-md-6 col-6 text-center">
+            <a class="btn btn-secondary">Editar libro</a>
+        </div>
+    </div>
+    
 {% endblock %}

@@ -65,7 +65,7 @@ header{
         Droppeado
     */
 $deseado: rgb(255, 196, 0);
-$interes: rgba(255, 139, 45, 0.904);
+$interesado: rgba(255, 139, 45, 0.904);
 $terminado: rgb(61, 139, 255);
 $leyendo: rgb(84, 255, 50);
 $stand-by: rgb(255, 60, 118);
@@ -96,11 +96,11 @@ $droppeado: rgb(255, 0, 0);
         background-color: $deseado;
     }
 }
-.interes{
-    color: $interes;
+.interesado{
+    color: $interesado;
 
     .circulo{
-        background-color: $interes;
+        background-color: $interesado;
     }
 }
 .terminado{

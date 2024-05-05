@@ -49,6 +49,7 @@ class BookController extends AbstractController
             
             $images[] = $imageFile;
         }
+        
 
         return $this->render('book/index.html.twig', [
             'controller_name' => 'BookController',
@@ -61,15 +62,18 @@ class BookController extends AbstractController
     #[Route('/book/{bookId}', name: 'app_book')]
     public function book(int $bookId, LibroRepository $libroRepository): Response{
         $book = $libroRepository->find($bookId);
-        $status = $book.getLectura()[0]; #We only care about the first result
+        $status = $book->getLectura(); #We only care about the first result
+
+        $status->setStatus("Interesado");
 
         # Save book image
-        saveImageTemporalFile($book->getPortada());
+        $imageFile = $this->saveImageTemporalFile($book->getPortada());
 
         return $this->render('book/book.html.twig', [
             'controller_name' => 'BookController',
             'book' => $book,
-            'status' => $status
+            'status' => $status,
+            'image' => $imageFile
         ]);
     }
 
@@ -114,6 +118,7 @@ class BookController extends AbstractController
         $book->setPortada($frontPage);
 
         $lectura = new Lectura();
+        $lectura->setStatus("UnKnown");
         $book->setLectura($lectura);
 
         // tell Doctrine you want to (eventually) save the Product (no queries yet)
