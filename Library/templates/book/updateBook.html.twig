@@ -8,47 +8,59 @@
         <div class="col-12 col-md-10 ">
             <div class="col-1"></div>
             <div class="col-11 col-md-12 ">
-                <div id="title" class="h1 title">Crear libro</div>
+                <div id="title" class="h1 title">Actualizar libro</div>
+            </div>
+
+            <div class="col-12">
+                <div class="text-center">
+                    <img src="{{ asset('image/' ~ image) }}" id="previewImage" class="bookGalery"/>
+                </div>
             </div>
 
             <div class="col-12">
                 <form action="#">
                     <div class="form-row">
                         <div class="col-12 col-md-12 form-group">
-                            <label for="titleInput">Título</label>
-                            <input type="text" class="form-control" id="titleInput" placeholder="Título del libro" required>
+                            <label for="titleInput">Titulo</label>
+                            <input type="text" class="form-control" id="titleInput" placeholder="Título del libro" value="{{ book.titulo }}" required>
                           </div>
                     </div>
                     <div class="form-row">
                         <div class="col-12 col-md-6 form-group">
                             <label for="authorInput">Autor</label>
-                            <input type="text" class="form-control" id="authorInput" placeholder="Autor del libro" required>
+                            <input type="text" class="form-control" id="authorInput" placeholder="Autor del libro" value="{{ book.autor}}" required>
                         </div>
                         <div class="col-12 col-md-6 form-group">
                            <label for="releaseDateInput">Fecha de publicación</label>
-                            <input type="date" class="form-control" id="releaseDateInput" placeholder="ReleaseDate" required>
+                            <input type="date" class="form-control" id="releaseDateInput" placeholder="ReleaseDate" value="{{ book.fechaPublicacion | date('Y-m-d') }}" required>
                         </div>      
                     </div>
                     <div class="form-row">
                         <div class="col-12 col-md-6 form-group">
                             <label for="editorialInput">Editorial</label>
-                            <input type="text" class="form-control" id="editorialInput" placeholder="Editorial" required>
+                            <input type="text" class="form-control" id="editorialInput" placeholder="Editorial" value="{{ book.editorial}}" required>
                         </div>
                         <div class="col-12 col-md-6 form-group">
                             <label for="languageInput">Idioma</label>
                             <select class="form-control" id="languageInput">
-                                <option value="">Español</option>
-                                <option value="">Inglés</option>
-                                <option value="">Catalán</option>
+                                {% for language in languages %}
+                                    <option 
+                                        {% if language.name == book.Lengua.name() %}
+                                            selected
+                                        {% endif %}
+                                        
+                                        value="{{ language.acronym }}"> {{ language.name}} </option>
+                                {% endfor %}
                             </select>
                         </div>    
                     </div>
                     <div class="form-group">
                         <span>Portada</span>                      
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="frontPage" required>
+                            <input type="file" accept=”.jpg, .jpeg, .png” class="custom-file-input" id="frontPage" required>
                             <label class="custom-file-label" for="frontPage">Selecciona la portada</label>
                         </div>
+                  
                     </div>
                     <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
                 </form>
@@ -59,6 +71,9 @@
     </div>
 {% endblock %}
 
+{% block javascripts %}
+    <script src="{{ asset('javascripts/previewImage.js')}}"></script>
+{% endblock %}
 
 
 

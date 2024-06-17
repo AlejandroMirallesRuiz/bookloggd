@@ -58,7 +58,6 @@ class BookController extends AbstractController
         ]);
     }
 
-    # Falta lógica 1
     #[Route('/book/{bookId}', name: 'app_book')]
     public function book(int $bookId, LibroRepository $libroRepository): Response{
         $book = $libroRepository->find($bookId);
@@ -133,18 +132,25 @@ class BookController extends AbstractController
     }
 
     #[Route('/updateBook/{bookId}', methods: ['GET'],  name: 'app_updateBook')]
-    public function updateBook(int $bookId, LibroRepository $libroRepository): Response{
+    public function updateBook(int $bookId, LibroRepository $libroRepository, LanguageRepository $languageRepository): Response{
         $book = $libroRepository->find($bookId);
+
+        $imageFile = $this->saveImageTemporalFile($book->getPortada());
+
+        $languages = $languageRepository->findAll();
 
         return $this->render('book/updateBook.html.twig', [
             'controller_name' => 'BookController',
+            'book' => $book,
+            'image' => $imageFile,
+            'languages' => $languages
         ]);
     }
     
     #[Route('/updateBook/{bookId}', methods: ['POST'],  name: 'post_updateBook')]
     public function post_UpdateBook(int $bookId, LibroRepository $libroRepository): Response{
         # Get book + update it
-        $book = $libroRepository.find($bookId);
+        $book = $libroRepository->find($bookId);
 
         # Update it (Think what parameters should change)
 
