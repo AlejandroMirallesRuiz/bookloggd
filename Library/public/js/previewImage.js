@@ -1,6 +1,6 @@
 const input = document.getElementById('frontPage');
 
-const previewPhoto = () => {
+const displayFile = () => {
     const file = input.files;
     if (file){
         const fileReader = new FileReader();
@@ -15,4 +15,4 @@ const previewPhoto = () => {
     }
 }
 
-input.addEventListener('change', previewPhoto);
+input.addEventListener('change', displayFile);

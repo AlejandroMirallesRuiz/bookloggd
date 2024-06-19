@@ -149,7 +149,6 @@ class BookController extends AbstractController
     
     #[Route('/updateBook/{bookId}', methods: ['POST'],  name: 'post_updateBook')]
     public function post_UpdateBook(int $bookId, LibroRepository $libroRepository): Response{
-        # Get book + update it
         $book = $libroRepository->find($bookId);
 
         # Update it (Think what parameters should change)
