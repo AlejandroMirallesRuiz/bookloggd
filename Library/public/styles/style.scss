@@ -165,6 +165,56 @@ $droppeado: rgb(255, 0, 0);
     color:rgb(186, 250, 255);
 }
 
+.drag-area {
+    height: 20em;
+    border: 0.3em dashed #e0eafc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin:0.1px auto;
+
+    .header {
+        color: #34495e;
+    }
+
+    .support {
+        color: gray;
+        margin: 0.1em 0 0.15em 0;
+  }
+
+    .drag-area.active {
+        border: 0.2em solid #1683ff;
+    }
+
+    .button {
+        font-weight: 500;
+        color: #1683ff;
+        cursor: pointer;
+    }
+
+    img {
+        height: 15em;
+        object-fit: cover;
+      }
+}
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
 footer{
     padding-top: 5em;
 }
+
+

@@ -43,12 +43,20 @@
                             </select>
                         </div>    
                     </div>
-                    <div class="form-group">
-                        <span>Portada</span>                      
-                        <div class="custom-file">
-                            <input name="frontPage" type="file" class="custom-file-input" id="frontPage" accept=”.jpg, .jpeg, .png” required />
-                            <label class="custom-file-label" for="frontPage">Selecciona la portada</label>
-                        </div>
+                    <div class="drag-area">
+                        <span>Portada</span>    
+                        <div>
+                            <input type="file" accept=”.jpg, .jpeg, .png” id="frontPage" required hidden>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <span class="header">Drag & Drop</span>
+                                    <span class="header">or <span class="button">browse</span></span><br/>
+                                    <span class="support">Supports: JPEG, JPG, PNG</span>
+                                </div>
+                            </div>
+                        </div>                  
+                        
                     </div>
                     <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
                 </form>
@@ -60,7 +68,9 @@
 {% endblock %}
 
 
-
+{% block javascripts %}
+    <script src="{{ asset('javascripts/dragImages.js')}}"></script>
+{% endblock %}
 
 
     
