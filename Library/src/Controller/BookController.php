@@ -40,7 +40,7 @@ class BookController extends AbstractController
 
         $images = [];
 
-        # Save book image
+        # Save all book images
         foreach ($books as $book){
             $image = $book->getPortada();
             $book_id = $book->getId();
@@ -171,8 +171,6 @@ class BookController extends AbstractController
         if ($frontPage){
             $book->setPortada($frontPage->getContent());
         }
-
-        $this->saveImageTemporalFile($book->getPortada(), "meta");
 
         $entityManager->persist($book);
         $entityManager->flush();

@@ -114,7 +114,7 @@ header .webTitle {
 .bookGalery, .showBook {
   padding: 0.5em;
   vertical-align: none;
-  max-width: 400px;
+  max-width: 200px;
 }
 
 .bookDetails {
