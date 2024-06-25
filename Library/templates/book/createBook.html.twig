@@ -43,11 +43,11 @@
                             </select>
                         </div>    
                     </div>
-                    <div class="drag-area">
-                        <span>Portada</span>    
+                    <div class="drag-area">    
+                        
+                            <input name="frontPage" type="file" accept=”.jpg, .jpeg, .png” id="frontPage" required hidden>
                         <div>
-                            <input type="file" accept=”.jpg, .jpeg, .png” id="frontPage" required hidden>
-
+                            <span>Portada</span>
                             <div class="row">
                                 <div class="col-12">
                                     <span class="header">Drag & Drop</span>
@@ -69,7 +69,7 @@
 
 
 {% block javascripts %}
-    <script src="{{ asset('javascripts/dragImages.js')}}"></script>
+    <script src="{{ asset('js/dragImages.js')}}"></script>
 {% endblock %}
 
 

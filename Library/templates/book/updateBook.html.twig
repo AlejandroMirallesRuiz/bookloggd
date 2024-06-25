@@ -18,31 +18,31 @@
             </div>
 
             <div class="col-12">
-                <form action="#" class="dropbox">
+                <form action="/updateBook/{{ book.id }}" method="POST" enctype="multipart/form-data">
                     <div class="form-row">
                         <div class="col-12 col-md-12 form-group">
                             <label for="titleInput">Titulo</label>
-                            <input type="text" class="form-control" id="titleInput" placeholder="Título del libro" value="{{ book.titulo }}" required>
+                            <input name="title" type="text" class="form-control" id="titleInput" placeholder="Título del libro" value="{{ book.titulo }}" required>
                           </div>
                     </div>
                     <div class="form-row">
                         <div class="col-12 col-md-6 form-group">
                             <label for="authorInput">Autor</label>
-                            <input type="text" class="form-control" id="authorInput" placeholder="Autor del libro" value="{{ book.autor}}" required>
+                            <input type="text" name="author" class="form-control" id="authorInput" placeholder="Autor del libro" value="{{ book.autor}}" required>
                         </div>
                         <div class="col-12 col-md-6 form-group">
                            <label for="releaseDateInput">Fecha de publicación</label>
-                            <input type="date" class="form-control" id="releaseDateInput" placeholder="ReleaseDate" value="{{ book.fechaPublicacion | date('Y-m-d') }}" required>
+                            <input type="date" name="releaseDate" class="form-control" id="releaseDateInput" placeholder="ReleaseDate" value="{{ book.fechaPublicacion | date('Y-m-d') }}" required>
                         </div>      
                     </div>
                     <div class="form-row">
                         <div class="col-12 col-md-6 form-group">
                             <label for="editorialInput">Editorial</label>
-                            <input type="text" class="form-control" id="editorialInput" placeholder="Editorial" value="{{ book.editorial}}" required>
+                            <input type="text" name="editorial" class="form-control" id="editorialInput" placeholder="Editorial" value="{{ book.editorial}}" required>
                         </div>
                         <div class="col-12 col-md-6 form-group">
                             <label for="languageInput">Idioma</label>
-                            <select class="form-control" id="languageInput">
+                            <select name="language" class="form-control" id="languageInput">
                                 {% for language in languages %}
                                     <option 
                                         {% if language.name == book.Lengua.name() %}
@@ -57,7 +57,7 @@
                     <div class="form-group">
                         <span class="h3">Portada</span>                      
                         <div class="custom-file">
-                            <input name="frontPage" type="file" class="custom-file-input" id="frontPage" accept=”.jpg, .jpeg, .png” required />
+                            <input name="frontPage" type="file" class="custom-file-input" id="frontPage" accept=”.jpg, .jpeg, .png” />
                             <label class="custom-file-label" for="frontPage">Selecciona la portada</label>
                         </div>
                     </div>
@@ -71,7 +71,7 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('javascripts/previewImage.js')}}"></script>
+    <script src="{{ asset('js/previewImage.js')}}"></script>
 {% endblock %}
 
 

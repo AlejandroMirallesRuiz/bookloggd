@@ -1,6 +1,8 @@
 const dropArea = document.querySelector(".drag-area");
 const dragText = document.querySelector(".header");
 
+let imgPlaceHolder = dropArea.querySelector("div");
+
 let button = dropArea.querySelector(".button");
 let input = dropArea.querySelector("input");
 let file;
@@ -50,7 +52,7 @@ function displayFile() {
       fileReader.onload = () => {
         let fileURL = fileReader.result;
         let imgTag = `<img src="${fileURL}" alt="">`;
-        dropArea.innerHTML = imgTag;
+        imgPlaceHolder.innerHTML = imgTag;
       };
       fileReader.readAsDataURL(file);
     } else {

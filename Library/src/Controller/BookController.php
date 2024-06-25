@@ -120,11 +120,7 @@ class BookController extends AbstractController
         $lectura->setStatus("UnKnown");
         $book->setLectura($lectura);
 
-        // tell Doctrine you want to (eventually) save the Product (no queries yet)
         $entityManager->persist($book);
-
-
-        // actually executes the queries (i.e. the INSERT query)
         $entityManager->flush();
         
         
@@ -148,14 +144,40 @@ class BookController extends AbstractController
     }
     
     #[Route('/updateBook/{bookId}', methods: ['POST'],  name: 'post_updateBook')]
-    public function post_UpdateBook(int $bookId, LibroRepository $libroRepository): Response{
+    public function post_UpdateBook(int $bookId, Request $request, LibroRepository $libroRepository, LanguageRepository $languageRepository, EntityManagerInterface $entityManager): Response{
+        $title = $request->request->get('title');
+        $author = $request->request->get('author');
+        $editorial = $request->request->get('editorial');
+        
+        $releaseDate = $request->request->get('releaseDate');
+        $dateFormat = 'Y-m-d';
+        $releaseDate = DateTime::createFromFormat($dateFormat, $releaseDate);
+
+        # Language
+        $languageAcronym = $request->request->get('language');
+        $language = $languageRepository->findOneBy(['acronym' => $languageAcronym]);
+        
+        # Front page
+        $frontPage = $request->files->get('frontPage'); # tmp_name = Path where its stored the image
+
         $book = $libroRepository->find($bookId);
+        $book->setTitulo($title);
+        $book->setAutor($author);
+        $book->setEditorial($editorial);
+        $book->setFechaPublicacion($releaseDate);
 
-        # Update it (Think what parameters should change)
+        $book->setLengua($language);
 
-        return $this->render('book/updateBook.html.twig', [
-            'controller_name' => 'BookController',
-        ]);
+        if ($frontPage){
+            $book->setPortada($frontPage->getContent());
+        }
+
+        $this->saveImageTemporalFile($book->getPortada(), "meta");
+
+        $entityManager->persist($book);
+        $entityManager->flush();
+
+        return new Response('Updated book with id '.$book->getId());
     }
 
 
