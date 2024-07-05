@@ -6,34 +6,36 @@
     
     <div class="row">
         <div class="col-1"></div>
-        <div class="col-11 deseado">
-            <span class="h1">Deseado</span>
+        <div class="col-11 {{ status.status}}">
+            <span class="h1">{{status.status}}</span>
         </div>
     </div>
+    <br/>
 
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-12 col-md-5 text-center">
-            <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1566425108i/33.jpg" class="book"/>
+            <img src="{{ asset('image/' ~ image) }}" class="book"/>
         </div>
         <div class="col-12 col-md-5">
             <form action="#">
                 <div class="form-row">
                     <div class="col-12 form-group text-center">
-                        <span class="h2 titleBookUpdated"> Señor de los anillos</span>
-                        <input type="text" class="form-control" id="titleBook" value="Señor de los anillos" hidden required disabled>
+                        <span class="h2 titleBookUpdated"> {{ book.titulo }}</span>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="col-12 col-md-12 form-group">
-                        <label for="languageInput">Estado</label>
-                        <select class="form-control" id="languageInput">
-                            <option value="">Deseado</option>
-                            <option value="">Interés</option>
-                            <option value="">Terminado</option>
-                            <option value="">Leyendo</option>
-                            <option value="">Stand-by</option>                                      
-                            <option value="">Droppeado</option>
+                        <label for="statusInput">Estado</label>
+                        <select class="form-control" id="statusInput" name="status" required>
+                            {% for oneStatus in allStatus  %}
+                                <option 
+                                    {% if (book.Lectura.status() == oneStatus) %}
+                                        selected
+                                    {% endif %}
+                                    value="{{ oneStatus }}">{{ oneStatus }}
+                                </option>
+                            {% endfor %}
                         </select>
                     </div>    
                 </div>
@@ -41,11 +43,19 @@
                 <div class="form-row">
                     <div class="col-12 col-md-6 form-group">
                         <label for="startDateInput">Fecha de comienzo</label>
-                        <input type="date" class="form-control" id="startDateInput">
+                        <input type="date" class="form-control" id="startDateInput" 
+                            {% if status.FechaComienzo != null %}
+                                value="{{ status.FechaComienzo | date('Y-m-d') }}"
+                            {% endif %}
+                        >
                     </div>
                     <div class="col-12 col-md-6 form-group">
                         <label for="finishedDateInput">Fecha de finalización</label>
-                        <input type="date" class="form-control" id="finishedDateInput">
+                        <input type="date" class="form-control" id="finishedDateInput" 
+                            {% if status.FechaFinal != null %}
+                                value="{{ status.FechaFinal | date('Y-m-d') }}"
+                            {% endif %}
+                        >
                     </div>      
                 </div>
                 <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>

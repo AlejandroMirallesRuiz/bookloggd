@@ -61,7 +61,7 @@ class BookController extends AbstractController
     #[Route('/book/{bookId}', name: 'app_book')]
     public function book(int $bookId, LibroRepository $libroRepository): Response{
         $book = $libroRepository->find($bookId);
-        $status = $book->getLectura(); #We only care about the first result
+        $status = $book->getLectura();
 
         $status->setStatus("Interesado");
 
@@ -117,7 +117,7 @@ class BookController extends AbstractController
         $book->setPortada($frontPage);
 
         $lectura = new Lectura();
-        $lectura->setStatus("UnKnown");
+        $lectura->setStatus("Deseado");
         $book->setLectura($lectura);
 
         $entityManager->persist($book);
@@ -181,11 +181,28 @@ class BookController extends AbstractController
 
     #[Route('/updateReadingStatus/{bookId}', methods: ['GET'], name: 'app_updateReadingStatus')]
     public function updateReadingStatus(int $bookId, LibroRepository $libroRepository): Response{
+        $allStatus = [
+            "Deseado",
+            "Interesado",
+            "Terminado",
+            "Leyendo",
+            "Stand-by",                                      
+            "Droppeado",
+        ];
+
         # Get book
         $book = $libroRepository->find($bookId);
+        $status = $book->getLectura();
+
+        
+        $imageFile = $this->saveImageTemporalFile($book->getPortada());
 
         return $this->render('book/updateReadingStatus.html.twig', [
             'controller_name' => 'BookController',
+            'book' => $book,
+            'status' => $status,
+            'allStatus' => $allStatus,
+            "image" => $imageFile
         ]);
     }
 
@@ -199,7 +216,7 @@ class BookController extends AbstractController
         ]);
     }
 
-    # Create book form
+    # Create language form
     #[Route('/createLanguage', methods: ['GET'],  name: 'app_createLanguage')]
     public function createLanguage(): Response{
 
