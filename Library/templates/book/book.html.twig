@@ -36,7 +36,11 @@
                     </tr>
 
                     <tr>
-                        <td colspan="2" class="text-center">{{ status.fechaComienzo|date("d/m/Y") }}-{{ status.fechaFinal|date("d/m/Y") }}</td>
+                        <td colspan="2" class="text-center">
+                            {{ (status.fechaComienzo != null) ? status.fechaComienzo|date("d/m/Y") : "??? " }}
+                            -
+                            {{ (status.fechaFinal != null) ?  status.fechaFinal|date("d/m/Y") : " ???" }}
+                        </td>
                     </tr>
                 </tbody>
             </table>

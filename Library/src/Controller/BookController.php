@@ -63,8 +63,6 @@ class BookController extends AbstractController
         $book = $libroRepository->find($bookId);
         $status = $book->getLectura();
 
-        $status->setStatus("Interesado");
-
         # Save book image
         $imageFile = $this->saveImageTemporalFile($book->getPortada());
 
@@ -181,6 +179,7 @@ class BookController extends AbstractController
 
     #[Route('/updateReadingStatus/{bookId}', methods: ['GET'], name: 'app_updateReadingStatus')]
     public function updateReadingStatus(int $bookId, LibroRepository $libroRepository): Response{
+        //TODO: Pasarlo a Lectura.php
         $allStatus = [
             "Deseado",
             "Interesado",
@@ -207,13 +206,29 @@ class BookController extends AbstractController
     }
 
     #[Route('/updateReadingStatus/{bookId}', methods: ['POST'], name: 'post_updateReadingStatus')]
-    public function post_UpdateReadingStatus(int $bookId, LibroRepository $libroRepository): Response{
+    public function post_UpdateReadingStatus(int $bookId, LibroRepository $libroRepository, Request $request, EntityManagerInterface $entityManager): Response{
         # Get book + update it
         $book = $libroRepository->find($bookId);
+        $status = $book->getLectura();
 
-        return $this->render('book/updateReadingStatus.html.twig', [
-            'controller_name' => 'BookController',
-        ]);
+        $statusType = $request->request->get("status");
+        $startingDate = $request->request->get("startDate");
+        $finishDate = $request->request->get("finishDate");
+
+        $dateFormat = 'Y-m-d';
+
+        $startingDate = ($startingDate != "") ? DateTime::createFromFormat($dateFormat, $startingDate) : null;
+        $finishDate = ($finishDate != "") ? DateTime::createFromFormat($dateFormat, $finishDate) : null;
+
+
+        $status->setStatus($statusType);
+        $status->setFechaComienzo($startingDate);
+        $status->setFechaFinal($finishDate);
+
+        $entityManager->persist($status);
+        $entityManager->flush();
+
+        return new Response('Updated lecture of book with id '.$book->getId());
     }
 
     # Create language form
