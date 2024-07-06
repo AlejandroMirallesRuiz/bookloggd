@@ -27,6 +27,15 @@ class Lectura
     #[ORM\JoinColumn(nullable: false)]
     private ?Libro $book = null;
 
+    static $allStatus = [
+            "Deseado",
+            "Interesado",
+            "Terminado",
+            "Leyendo",
+            "Stand-by",                                      
+            "Droppeado",
+        ];
+
     public function getId(): ?int
     {
         return $this->id;
