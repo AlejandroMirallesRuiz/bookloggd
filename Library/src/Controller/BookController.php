@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -88,7 +89,7 @@ class BookController extends AbstractController
 
     # Create book
     #[Route('/createBook', methods: ['POST'],  name: 'post_createBook')]
-    public function post_createBook(Request $request, LanguageRepository $languageRepository, EntityManagerInterface $entityManager): Response{
+    public function post_createBook(Request $request, LanguageRepository $languageRepository, EntityManagerInterface $entityManager, ValidatorInterface $validator): Response{
         $title = $request->request->get('title');
         $author = $request->request->get('author');
         $editorial = $request->request->get('editorial');
@@ -118,6 +119,10 @@ class BookController extends AbstractController
         $lectura->setStatus("Deseado");
         $book->setLectura($lectura);
 
+        if ( count($bookErrors = $validator->validate($book)) > 0){
+            return new Response( (string) $bookErrors );
+        }
+
         $entityManager->persist($book);
         $entityManager->flush();
         
@@ -142,7 +147,7 @@ class BookController extends AbstractController
     }
     
     #[Route('/updateBook/{bookId}', methods: ['POST'],  name: 'post_updateBook')]
-    public function post_UpdateBook(int $bookId, Request $request, LibroRepository $libroRepository, LanguageRepository $languageRepository, EntityManagerInterface $entityManager): Response{
+    public function post_UpdateBook(int $bookId, Request $request, LibroRepository $libroRepository, LanguageRepository $languageRepository, EntityManagerInterface $entityManager, ValidatorInterface $validator): Response{
         $title = $request->request->get('title');
         $author = $request->request->get('author');
         $editorial = $request->request->get('editorial');
@@ -168,6 +173,10 @@ class BookController extends AbstractController
 
         if ($frontPage){
             $book->setPortada($frontPage->getContent());
+        }
+
+        if ( count($bookErrors = $validator->validate($book)) > 0){
+            return new Response( (string) $bookErrors );
         }
 
         $entityManager->persist($book);

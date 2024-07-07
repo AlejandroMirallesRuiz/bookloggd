@@ -8,6 +8,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
+
 #[ORM\Entity(repositoryClass: LibroRepository::class)]
 class Libro
 {
@@ -17,15 +20,19 @@ class Libro
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 255)]
     private ?string $Titulo = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Length(max: 255)]
     private ?string $Editorial = null;
 
     #[ORM\Column(length: 255)]
     private ?string $Autor = null;
 
     #[ORM\Column(type: Types::BLOB)]
+    #[Assert\NotBlank]
     private $Portada = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
@@ -33,6 +40,7 @@ class Libro
 
     #[ORM\ManyToOne(inversedBy: 'libros')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotBlank]
     private ?Language $lengua = null;
 
     #[ORM\OneToOne(mappedBy: 'book', cascade: ['persist', 'remove'])]

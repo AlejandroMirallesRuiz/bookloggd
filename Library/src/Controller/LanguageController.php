@@ -4,11 +4,15 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 use App\Repository\LanguageRepository;
 
 use Doctrine\ORM\EntityManagerInterface;
+
+use App\Entity\Language;
 
 class LanguageController extends AbstractController
 {
@@ -23,7 +27,7 @@ class LanguageController extends AbstractController
 
     # Create language
     #[Route('/createLanguage', methods: ['POST'],  name: 'post_createLanguage')]
-    public function post_createLanguage(Request $request, EntityManagerInterface $entityManager): Response{
+    public function post_createLanguage(Request $request, EntityManagerInterface $entityManager, ValidatorInterface $validator): Response{
         # Language
         $languageName = $request->request->get('language');
         
@@ -32,6 +36,10 @@ class LanguageController extends AbstractController
         $language = new Language();
         $language->setName($languageName);
         $language->setAcronym($languageAcronym);
+
+        if ( count($languageErrors = $validator->validate($language)) > 0){
+            return new Response( (string) $languageErrors );
+        }
         
 
         // tell Doctrine you want to (eventually) save the Product (no queries yet)

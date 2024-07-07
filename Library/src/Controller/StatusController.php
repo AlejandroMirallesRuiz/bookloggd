@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -12,6 +14,8 @@ use App\Repository\LibroRepository;
 
 use App\Entity\Libro;
 use App\Entity\Lectura;
+
+use DateTime;
 
 
 class StatusController extends AbstractController
@@ -47,7 +51,7 @@ class StatusController extends AbstractController
     
 
     #[Route('/updateReadingStatus/{bookId}', methods: ['POST'], name: 'post_updateReadingStatus')]
-    public function post_UpdateReadingStatus(int $bookId, LibroRepository $libroRepository, Request $request, EntityManagerInterface $entityManager): Response{
+    public function post_UpdateReadingStatus(int $bookId, LibroRepository $libroRepository, Request $request, EntityManagerInterface $entityManager, ValidatorInterface $validator): Response{
         # Get book + update it
         $book = $libroRepository->find($bookId);
         $status = $book->getLectura();
@@ -65,6 +69,10 @@ class StatusController extends AbstractController
         $status->setStatus($statusType);
         $status->setFechaComienzo($startingDate);
         $status->setFechaFinal($finishDate);
+
+        if ( count($statusErrors = $validator->validate($status)) > 0){
+            return new Response( (string) $statusErrors );
+        }
 
         $entityManager->persist($status);
         $entityManager->flush();

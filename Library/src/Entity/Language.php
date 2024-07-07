@@ -7,6 +7,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
+
 #[ORM\Entity(repositoryClass: LanguageRepository::class)]
 class Language
 {
@@ -16,12 +19,17 @@ class Language
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 255)]
     private ?string $name = null;
 
     #[ORM\OneToMany(targetEntity: Libro::class, mappedBy: 'lengua')]
     private Collection $libros;
 
     #[ORM\Column(length: 10)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 2)]
+    #[Assert\Length(max: 10)]
     private ?string $acronym = null;
 
     public function __construct()
