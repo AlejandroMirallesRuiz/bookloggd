@@ -127,7 +127,12 @@ class BookController extends AbstractController
         $entityManager->flush();
         
         
-        return new Response('Saved new product with id '.$book->getId());
+        $this->addFlash(
+            'success',
+            'Book created succesfully'
+        );
+
+        return $this->redirectToRoute('app_index');
     }
 
     #[Route('/updateBook/{bookId}', methods: ['GET'],  name: 'app_updateBook')]
@@ -182,6 +187,11 @@ class BookController extends AbstractController
         $entityManager->persist($book);
         $entityManager->flush();
 
-        return new Response('Updated book with id '.$book->getId());
+        $this->addFlash(
+            'success',
+            'Book updated succesfully'
+        );
+
+        return $this->redirectToRoute('app_book', ["bookId" => $bookId ]);
     }
 }

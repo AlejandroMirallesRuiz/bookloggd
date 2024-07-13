@@ -22,6 +22,17 @@
         </div>
     </header>
 
+    <div id="flashes" class="flashes">
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                {# Flash can be either: "notice" (Información), "warning" o "success" #}
+                <div class="flash flash-{{ label }}">
+                    <span class="h3">{{ label|title }}:</span> {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+
 
     <content class="content">
         {% block content %}{% endblock %}

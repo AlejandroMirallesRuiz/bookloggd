@@ -77,6 +77,11 @@ class StatusController extends AbstractController
         $entityManager->persist($status);
         $entityManager->flush();
 
-        return new Response('Updated lecture of book with id '.$book->getId());
+        $this->addFlash(
+            'success',
+            'Status updated succesfully'
+        );
+
+        return $this->redirectToRoute('app_book', ["bookId" => $bookId ]);
     }
 }

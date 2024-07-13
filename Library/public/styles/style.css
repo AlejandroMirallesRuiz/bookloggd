@@ -169,6 +169,26 @@ header .webTitle {
      object-fit: cover;
 }
 
+.flashes {
+  display: block;
+}
+.flashes .flash {
+  display: block;
+  border-style: dashed;
+}
+.flashes .flash-success {
+  color: black;
+  background-color: greenyellow;
+}
+.flashes .flash-warning {
+  color: white;
+  background-color: red;
+}
+.flashes .flash-notice {
+  color: black;
+  background-color: orange;
+}
+
 footer {
   padding-top: 5em;
 }/*# sourceMappingURL=style.css.map */

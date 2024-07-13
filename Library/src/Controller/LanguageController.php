@@ -47,6 +47,13 @@ class LanguageController extends AbstractController
 
         // actually executes the queries (i.e. the INSERT query)
         $entityManager->flush();
+
+                $this->addFlash(
+            'success',
+            'Language created succesfully'
+        );
+
+        return $this->redirectToRoute('app_createLanguage');
         
         return new Response('Saved new language with name '.$language->getName() . " and id " . $language->getId());
     }

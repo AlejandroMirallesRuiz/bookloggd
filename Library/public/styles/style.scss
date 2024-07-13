@@ -201,7 +201,29 @@ $droppeado: rgb(255, 0, 0);
 
 
   
-  
+.flashes {
+    display: block;
+
+    .flash{
+        display: block;
+        
+        border-style:dashed ;
+    }
+
+    .flash-success{
+        color: black;
+        background-color: greenyellow;
+    }
+
+    .flash-warning{
+        color: white;
+        background-color: red;
+    }
+    .flash-notice{
+        color: black;
+        background-color: orange;
+    }
+}  
 
 
 
