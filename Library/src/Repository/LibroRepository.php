@@ -45,4 +45,9 @@ class LibroRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    public function findAllSorted(){
+        return $this->findBy(array(), array('id' => 'DESC'));
+    }
 }
+

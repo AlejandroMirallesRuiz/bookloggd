@@ -37,7 +37,7 @@ class BookController extends AbstractController
     #[Route('/', name: 'app_index')]
     public function index(LibroRepository $libroRepository, Request $request): Response{
         # Get all books
-        $books = $libroRepository->findAll();
+        $books = $libroRepository->findAllSorted();
 
         $images = [];
 
