@@ -8,7 +8,7 @@
             <div class="col-12 col-md-10 ">
                 <div class="col-1"></div>
                 <div class="col-11 col-md-12 ">
-                    <div id="title" class="h1 title">Omegatitulo</div>
+                    <div id="title" class="h1 title">Bookloggd</div>
                 </div>
 
                 <div id="filters" class="col-12 col-md-12 text-center">
@@ -16,9 +16,11 @@
                 </div>
 
                 <div class="col-12 col-md-12 " id="bookGalerys">
-                    {% for i in 1..12 %}
-                        <img src="{{ asset('image/LoRTolkien.jpg') }}" class="bookGalery"/>
-                    {% endfor %}
+                    {% if images|length > 0 %}
+                        {% for i in 0..(images|length - 1) %}
+                            <a href="book/{{ books[i].getId() }}"> <img src="{{ asset('image/' ~ images[i]) }}" class="bookGalery"/> </a>
+                        {% endfor %}
+                    {% endif %}
                 </div>
             </div>
             <div class="col-md-1"></div>

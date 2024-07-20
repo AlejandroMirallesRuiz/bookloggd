@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Update Book {% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-12 col-md-10 ">
+            <div class="col-1"></div>
+            <div class="col-11 col-md-12 ">
+                <div id="title" class="h1 title">Crear libro</div>
+            </div>
+
+            <div class="col-12">
+                <form action="/createBook" method="POST" enctype="multipart/form-data">
+                    <div class="form-row">
+                        <div class="col-12 col-md-12 form-group">
+                            <label for="titleInput">Título</label>
+                            <input name="title" type="text" class="form-control" id="titleInput" placeholder="Título del libro" required>
+                          </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-12 col-md-6 form-group">
+                            <label for="authorInput">Autor</label>
+                            <input name="author" type="text" class="form-control" id="authorInput" placeholder="Autor del libro" required>
+                        </div>
+                        <div class="col-12 col-md-6 form-group">
+                           <label for="releaseDateInput">Fecha de publicación</label>
+                            <input name="releaseDate" type="date" class="form-control" id="releaseDateInput" placeholder="ReleaseDate" required>
+                        </div>      
+                    </div>
+                    <div class="form-row">
+                        <div class="col-12 col-md-6 form-group">
+                            <label for="editorialInput">Editorial</label>
+                            <input name="editorial" type="text" class="form-control" id="editorialInput" placeholder="Editorial" required>
+                        </div>
+                        <div class="col-12 col-md-6 form-group">
+                            <label for="languageInput">Idioma</label>
+                            <select name="language" class="form-control" id="languageInput">
+                                {% for language in languages %}
+                                    <option value="{{ language.acronym }}">{{language.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>    
+                    </div>
+                    <div class="drag-area">    
+                        
+                            <input name="frontPage" type="file" accept=”.jpg, .jpeg, .png” id="frontPage" required hidden>
+                        <div>
+                            <span>Portada</span>
+                            <div class="row">
+                                <div class="col-12">
+                                    <span class="header">Drag & Drop</span>
+                                    <span class="header">or <span class="button">browse</span></span><br/>
+                                    <span class="support">Supports: JPEG, JPG, PNG</span>
+                                </div>
+                            </div>
+                        </div>                  
+                        
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
+                </form>
+            </div>
+                
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+{% endblock %}
+
+
+{% block javascripts %}
+    <script src="{{ asset('js/dragImages.js')}}"></script>
+{% endblock %}
+
+
+    

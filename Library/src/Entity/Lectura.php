@@ -6,6 +6,9 @@ use App\Repository\LecturaRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
+
 #[ORM\Entity(repositoryClass: LecturaRepository::class)]
 class Lectura
 {
@@ -15,6 +18,13 @@ class Lectura
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Choice(["Deseado",
+            "Interesado",
+            "Terminado",
+            "Leyendo",
+            "Stand-by",                                      
+            "Droppeado",])]
     private ?string $status = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
@@ -23,9 +33,19 @@ class Lectura
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $FechaFinal = null;
 
-    #[ORM\OneToOne(inversedBy: 'lectura')]
+    #[ORM\OneToOne(inversedBy: 'lectura', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Libro $Libro = null;
+    #[Assert\NotBlank]
+    private ?Libro $book = null;
+
+    static $allStatus = [
+        "Deseado",
+        "Interesado",
+        "Terminado",
+        "Leyendo",
+        "Stand-by",                                      
+        "Droppeado",
+    ];
 
     public function getId(): ?int
     {
@@ -68,14 +88,14 @@ class Lectura
         return $this;
     }
 
-    public function getLibro(): ?Libro
+    public function getBook(): ?Libro
     {
-        return $this->Libro;
+        return $this->book;
     }
 
-    public function setLibro(?Libro $Libro): static
+    public function setBook(Libro $book): static
     {
-        $this->Libro = $Libro;
+        $this->book = $book;
 
         return $this;
     }

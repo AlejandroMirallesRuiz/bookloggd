@@ -6,15 +6,16 @@
 /config/secrets/prod/prod.decrypt.private.php
 /public/bundles/
 /var/
-/vendor/
-###< symfony/framework-bundle ###
-
-###> phpunit/phpunit ###
-/phpunit.xml
-.phpunit.result.cache
+/vendorresult.cache
+/vendor
 ###< phpunit/phpunit ###
 
 ###> symfony/phpunit-bridge ###
 .phpunit.result.cache
 /phpunit.xml
-###< symfony/phpunit-bridge ###
+###< symfon/
+###< symfony/framework-bundle ###
+
+###> phpunit/phpunit ###
+/phpunit.xml
+.phpunit.y/phpunit-bridge ###

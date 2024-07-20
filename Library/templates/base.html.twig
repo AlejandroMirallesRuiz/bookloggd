@@ -17,10 +17,21 @@
                 <a href="/">Bookloggd</a>
             </div>
             <div class="col-md-4 col-4 btn">
-                Crear libro
+                <a href="/createBook">Crear libro</a>
             </div>
         </div>
     </header>
+
+    <div id="flashes" class="flashes">
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                {# Flash can be either: "notice" (Información), "warning" o "success" #}
+                <div class="flash flash-{{ label }}">
+                    <span class="h3">{{ label|title }}:</span> {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
 
 
     <content class="content">
@@ -39,5 +50,8 @@
     </footer>
   <!-- Bootstrap JS CDN (opcional, si necesitas funcionalidades de JavaScript de Bootstrap) -->
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  {% block javascripts %}{% endblock %}
+
 </body>
 </html>

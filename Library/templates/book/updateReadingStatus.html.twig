@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Update Status Reading {% endblock %}
+
+{% block content %}
+    
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-11 {{ status.status|lower}}">
+            <span class="h1">Actualizar lectura</span>
+        </div>
+    </div>
+    <br/>
+
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-12 col-md-5 text-center">
+            <img src="{{ asset('image/' ~ image) }}" class="book"/>
+        </div>
+        <div class="col-12 col-md-5">
+            <form action="/updateReadingStatus/{{ book.id }}" method="POST" enctype="multipart/form-data">
+                <div class="form-row">
+                    <div class="col-12 text-center">
+                        <a href="/book/{{book.id}}"
+                            <span class="h2 titleBookUpdated"> {{ book.titulo }}</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-12 col-md-12 form-group">
+                        <label for="statusInput">Estado</label>
+                        <select class="form-control" id="statusInput" name="status" required>
+                            {% for oneStatus in allStatus  %}
+                                <option 
+                                    {% if (book.Lectura.status() == oneStatus) %}
+                                        selected
+                                    {% endif %}
+                                    value="{{ oneStatus }}">{{ oneStatus }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>    
+                </div>
+                    
+                <div class="form-row">
+                    <div class="col-12 col-md-6 form-group">
+                        <label for="startDateInput">Fecha de comienzo</label>
+                        <input type="date" class="form-control" name="startDate" id="startDateInput" 
+                            {% if status.FechaComienzo != null %}
+                                value="{{ status.FechaComienzo | date('Y-m-d') }}"
+                            {% endif %}
+                        >
+                    </div>
+                    <div class="col-12 col-md-6 form-group">
+                        <label for="finishedDateInput">Fecha de finalización</label>
+                        <input name="finishDate" type="date" class="form-control" id="finishedDateInput" 
+                            {% if status.FechaFinal != null %}
+                                value="{{ status.FechaFinal | date('Y-m-d') }}"
+                            {% endif %}
+                        >
+                    </div>      
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+
+    

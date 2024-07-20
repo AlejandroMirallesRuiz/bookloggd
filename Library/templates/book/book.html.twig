@@ -4,65 +4,58 @@
 
 {% block content %}
     <div class="row">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-11 estado deseado">
-                        <span id="title" class="h1"><span class="circulo"></span>Título libro</span>
-                        <span class="estadoName h5">Deseado</span>
-                    </div>
-                </div>
-                <div class="row media">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-5 col-12 mr-3 text-center">
-                        <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1566425108i/33.jpg" class="book"/>
-                    </div>
-
-
-
-                    <div class="col-12 col-md-5 media-body align-self-center bookDetails">
-                    <!--
-                        <div class="row">
-                            <div class="col-md-7">
-                                Tolkien
-                            </div>
-                            <div class="col-md-5">
-                                1928
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-7">
-                                Editorial random
-                            </div>
-                            <div class="col-md-5">
-                                Español
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 text-center">
-                                Prehistoria-Futuro
-                            </div>
-                        </div>
-                    </div>
-                -->
-                        <table class="table">
-                            <tbody>
-                                <tr>
-                                    <td>Autor Tolkien</td>
-                                    <td>1928</td>
-                                </tr>
-                                
-                                <tr>
-                                    <td>Editorial random</td>
-                                    <td>Español</td>
-                                </tr>
-
-                                <tr>
-                                    <td colspan="2" class="text-center">Prehistoria-Eternidad</td>
-                                    
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div class="col-md-1"></div>
+        <div class="col-md-1"></div>
+        <div class="col-md-11 estado {{ status.status|lower }}">
+            <span id="title" class="h1"><span class="circulo"></span>{{ book.titulo }}</span>
+            <span class="estadoName h5">{{ status.status }}</span>
+        </div>
     </div>
+    
+    <br/>
+    
+    <div class="row media mt-3">
+        <div class="col-md-1"></div>
+        <div class="col-md-5 col-12 mr-3 text-center">
+            <img src="{{ asset('image/' ~ image) }}" class="book"/>
+        </div>
+
+
+
+        <div class="col-12 col-md-5 media-body align-self-center bookDetails">
+                    
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td>{{ book.autor }}</td>
+                        <td>{{ book.fechaPublicacion|date("d/m/Y") }}</td>
+                    </tr>
+                            
+                    <tr>
+                        <td>{{ book.editorial}}</td>
+                        <td>{{ book.Lengua.name() }}</td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2" class="text-center">
+                            {{ (status.fechaComienzo != null) ? status.fechaComienzo|date("d/m/Y") : "??? " }}
+                            -
+                            {{ (status.fechaFinal != null) ?  status.fechaFinal|date("d/m/Y") : " ???" }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-md-1"></div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-md-6 col-6 text-center">
+            <a href="/updateReadingStatus/{{book.id}}" class="btn btn-primary">Actualizar lectura</a>
+        </div>
+        <div class="col-md-6 col-6 text-center">
+            <a href="/updateBook/{{ book.id }}" class="btn btn-secondary">Editar libro</a>
+        </div>
+    </div>
+    
 {% endblock %}

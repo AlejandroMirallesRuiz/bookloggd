@@ -65,7 +65,7 @@ header{
         Droppeado
     */
 $deseado: rgb(255, 196, 0);
-$interes: rgba(255, 139, 45, 0.904);
+$interesado: rgba(255, 139, 45, 0.904);
 $terminado: rgb(61, 139, 255);
 $leyendo: rgb(84, 255, 50);
 $stand-by: rgb(255, 60, 118);
@@ -96,11 +96,11 @@ $droppeado: rgb(255, 0, 0);
         background-color: $deseado;
     }
 }
-.interes{
-    color: $interes;
+.interesado{
+    color: $interesado;
 
     .circulo{
-        background-color: $interes;
+        background-color: $interesado;
     }
 }
 .terminado{
@@ -140,8 +140,9 @@ $droppeado: rgb(255, 0, 0);
     padding: 0.5em;
     
     vertical-align: none;
-}
 
+    max-width: 200px;
+}
 
 .bookDetails{
     font-size: 2em;
@@ -164,6 +165,78 @@ $droppeado: rgb(255, 0, 0);
     color:rgb(186, 250, 255);
 }
 
+.drag-area {
+    height: 20em;
+    border: 0.3em dashed #e0eafc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin:0.1px auto;
+
+    .header {
+        color: #34495e;
+    }
+
+    .support {
+        color: gray;
+        margin: 0.1em 0 0.15em 0;
+  }
+
+    .drag-area.active {
+        border: 0.2em solid #1683ff;
+    }
+
+    .button {
+        font-weight: 500;
+        color: #1683ff;
+        cursor: pointer;
+    }
+
+    img {
+        height: 15em;
+        object-fit: cover;
+      }
+}
+
+
+  
+.flashes {
+    display: block;
+
+    .flash{
+        display: block;
+        
+        border-style:dashed ;
+    }
+
+    .flash-success{
+        color: black;
+        background-color: greenyellow;
+    }
+
+    .flash-warning{
+        color: white;
+        background-color: red;
+    }
+    .flash-notice{
+        color: black;
+        background-color: orange;
+    }
+}  
+
+
+
+
+
+
+
+
+
+
+
 footer{
     padding-top: 5em;
 }
+
+

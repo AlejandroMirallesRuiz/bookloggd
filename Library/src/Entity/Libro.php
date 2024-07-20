@@ -8,6 +8,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
+
 #[ORM\Entity(repositoryClass: LibroRepository::class)]
 class Libro
 {
@@ -17,15 +20,19 @@ class Libro
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 255)]
     private ?string $Titulo = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Length(max: 255)]
     private ?string $Editorial = null;
 
     #[ORM\Column(length: 255)]
     private ?string $Autor = null;
 
     #[ORM\Column(type: Types::BLOB)]
+    #[Assert\NotBlank]
     private $Portada = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
@@ -33,14 +40,15 @@ class Libro
 
     #[ORM\ManyToOne(inversedBy: 'libros')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotBlank]
     private ?Language $lengua = null;
 
-    #[ORM\OneToOne(targetEntity: Lectura::class, mappedBy: 'Libro', orphanRemoval: true)]
-    private Collection $lectura;
+    #[ORM\OneToOne(mappedBy: 'book', cascade: ['persist', 'remove'])]
+    private ?Lectura $lectura = null;
 
     public function __construct()
     {
-        $this->lectura = new ArrayCollection();
+        #$this->lectura = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -120,33 +128,21 @@ class Libro
         return $this;
     }
 
-    /**
-     * @return Collection<int, Lectura>
-     */
-    public function getLectura(): Collection
+    public function getLectura(): ?Lectura
     {
         return $this->lectura;
     }
 
-    public function addLectura(Lectura $lectura): static
+    public function setLectura(Lectura $lectura): static
     {
-        if (!$this->lectura->contains($lectura)) {
-            $this->lectura->add($lectura);
-            $lectura->setLibro($this);
+        // set the owning side of the relation if necessary
+        if ($lectura->getBook() !== $this) {
+            $lectura->setBook($this);
         }
+
+        $this->lectura = $lectura;
 
         return $this;
     }
 
-    public function removeLectura(Lectura $lectura): static
-    {
-        if ($this->lectura->removeElement($lectura)) {
-            // set the owning side to null (unless already changed)
-            if ($lectura->getLibro() === $this) {
-                $lectura->setLibro(null);
-            }
-        }
-
-        return $this;
-    }
 }

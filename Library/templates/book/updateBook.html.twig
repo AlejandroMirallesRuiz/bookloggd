@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Update Book {% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-12 col-md-10 ">
+            <div class="col-1"></div>
+            <div class="col-11 col-md-12 ">
+                <div id="title" class="h1 title">Actualizar libro</div>
+            </div>
+
+            <div class="col-12">
+                <div class="text-center">
+                    <img src="{{ asset('image/' ~ image) }}" id="previewImage" class="bookGalery"/>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <form action="/updateBook/{{ book.id }}" method="POST" enctype="multipart/form-data">
+                    <div class="form-row">
+                        <div class="col-12 col-md-12 form-group">
+                            <label for="titleInput">Titulo</label>
+                            <input name="title" type="text" class="form-control" id="titleInput" placeholder="Título del libro" value="{{ book.titulo }}" required>
+                          </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-12 col-md-6 form-group">
+                            <label for="authorInput">Autor</label>
+                            <input type="text" name="author" class="form-control" id="authorInput" placeholder="Autor del libro" value="{{ book.autor}}" required>
+                        </div>
+                        <div class="col-12 col-md-6 form-group">
+                           <label for="releaseDateInput">Fecha de publicación</label>
+                            <input type="date" name="releaseDate" class="form-control" id="releaseDateInput" placeholder="ReleaseDate" value="{{ book.fechaPublicacion | date('Y-m-d') }}" required>
+                        </div>      
+                    </div>
+                    <div class="form-row">
+                        <div class="col-12 col-md-6 form-group">
+                            <label for="editorialInput">Editorial</label>
+                            <input type="text" name="editorial" class="form-control" id="editorialInput" placeholder="Editorial" value="{{ book.editorial}}" required>
+                        </div>
+                        <div class="col-12 col-md-6 form-group">
+                            <label for="languageInput">Idioma</label>
+                            <select name="language" class="form-control" id="languageInput">
+                                {% for language in languages %}
+                                    <option 
+                                        {% if language.name == book.Lengua.name() %}
+                                            selected
+                                        {% endif %}
+                                        
+                                        value="{{ language.acronym }}"> {{ language.name}} </option>
+                                {% endfor %}
+                            </select>
+                        </div>    
+                    </div>
+                    <div class="form-group">
+                        <span class="h3">Portada</span>                      
+                        <div class="custom-file">
+                            <input name="frontPage" type="file" class="custom-file-input" id="frontPage" accept=”.jpg, .jpeg, .png” />
+                            <label class="custom-file-label" for="frontPage">Selecciona la portada</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
+                </form>
+            </div>
+                
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/previewImage.js')}}"></script>
+{% endblock %}
+
+
+
+
+    

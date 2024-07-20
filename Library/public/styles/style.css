@@ -76,10 +76,10 @@ header .webTitle {
   background-color: rgb(255, 196, 0);
 }
 
-.interes {
+.interesado {
   color: rgba(255, 139, 45, 0.904);
 }
-.interes .circulo {
+.interesado .circulo {
   background-color: rgba(255, 139, 45, 0.904);
 }
 
@@ -114,6 +114,7 @@ header .webTitle {
 .bookGalery, .showBook {
   padding: 0.5em;
   vertical-align: none;
+  max-width: 200px;
 }
 
 .bookDetails {
@@ -136,6 +137,56 @@ header .webTitle {
 
 .titleBookUpdated {
   color: rgb(186, 250, 255);
+}
+
+.drag-area {
+  height: 20em;
+  border: 0.3em dashed #e0eafc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0.1px auto;
+}
+.drag-area .header {
+  color: #34495e;
+}
+.drag-area .support {
+  color: gray;
+  margin: 0.1em 0 0.15em 0;
+}
+.drag-area .drag-area.active {
+  border: 0.2em solid #1683ff;
+}
+.drag-area .button {
+  font-weight: 500;
+  color: #1683ff;
+  cursor: pointer;
+}
+.drag-area img {
+  height: 15em;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.flashes {
+  display: block;
+}
+.flashes .flash {
+  display: block;
+  border-style: dashed;
+}
+.flashes .flash-success {
+  color: black;
+  background-color: greenyellow;
+}
+.flashes .flash-warning {
+  color: white;
+  background-color: red;
+}
+.flashes .flash-notice {
+  color: black;
+  background-color: orange;
 }
 
 footer {
