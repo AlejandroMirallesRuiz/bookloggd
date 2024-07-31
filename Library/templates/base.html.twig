@@ -1,57 +1,147 @@
+ {% set flashes = app.flashes %}
+
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %}{% endblock %}</title>
-  <!-- Bootstrap CSS CDN -->
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-  
-  <link href="{{ asset('styles/style.css') }}" rel="stylesheet">
-</head>
-<body>
-    <header id="header">
-        <div class="row">
-            <div class="col-md-1 col-1 fakeHeader"></div>
-            <div class="col-md-6 col-6 webTitle h1">
-                <a href="/">Bookloggd</a>
-            </div>
-            <div class="col-md-4 col-4 btn">
-                <a href="/createBook">Crear libro</a>
-            </div>
+<html class="wide wow-animation" lang="es">
+  <head>
+    <title>{% block title %}{% endblock %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width height=device-height initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="{{ asset('image/favicon.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,600,700,800,900%7CBaloo">
+    <link rel="stylesheet" href="{{ asset('styles/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('styles/fonts.css') }}">
+    <link rel="stylesheet" href="{{ asset('styles/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('styles/customStyles.css') }}">
+    <style>.ie-panel{display: none;background: #212121;padding: 10px 0;box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3);clear: both;text-align:center;position: relative;z-index: 1;} html.ie-10 .ie-panel, html.lt-ie-10 .ie-panel {display: block;}</style>
+  </head>
+  <body>
+    <div class="ie-panel"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
+    <div class="preloader">
+      <div class="preloader-inner">
+        <div class="preloader-top">
+          <div class="preloader-top-sun">
+            <div class="preloader-top-sun-bg"></div>
+            <div class="preloader-top-sun-line preloader-top-sun-line-0"></div>
+            <div class="preloader-top-sun-line preloader-top-sun-line-45"></div>
+            <div class="preloader-top-sun-line preloader-top-sun-line-90"></div>
+            <div class="preloader-top-sun-line preloader-top-sun-line-135"></div>
+            <div class="preloader-top-sun-line preloader-top-sun-line-180"></div>
+            <div class="preloader-top-sun-line preloader-top-sun-line-225"></div>
+            <div class="preloader-top-sun-line preloader-top-sun-line-270"></div>
+            <div class="preloader-top-sun-line preloader-top-sun-line-315"></div>
+          </div>
         </div>
-    </header>
-
-    <div id="flashes" class="flashes">
-        {% for label, messages in app.flashes %}
-            {% for message in messages %}
-                {# Flash can be either: "notice" (Información), "warning" o "success" #}
-                <div class="flash flash-{{ label }}">
-                    <span class="h3">{{ label|title }}:</span> {{ message }}
-                </div>
-            {% endfor %}
-        {% endfor %}
+        <div class="preloader-bottom">
+          <div class="preloader-bottom-line preloader-bottom-line-lg"></div>
+          <div class="preloader-bottom-line preloader-bottom-line-md"></div>
+          <div class="preloader-bottom-line preloader-bottom-line-sm"></div>
+          <div class="preloader-bottom-line preloader-bottom-line-xs"></div>
+        </div>
+      </div>
     </div>
-
-
-    <content class="content">
-        {% block content %}{% endblock %}
-    </content>
-
-    
-      
-
-
-    <footer>
-        <div class="row">
-            <div class="col-12"></div>
-            <div class="col-12"></div>
+    <div class="page">
+      <!-- Page Header-->
+      <header class="section page-header page-header-1 context-dark">
+        <div class="page-header-1-figure m-parallax">
+          <div class="page-header-1-image m-parallax-image" style="background-image: url({{ asset('image/Banner.jpg') }});"></div>
         </div>
-    </footer>
-  <!-- Bootstrap JS CDN (opcional, si necesitas funcionalidades de JavaScript de Bootstrap) -->
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <!-- RD Navbar-->
+        <div class="rd-navbar-wrap">
+          <nav class="rd-navbar rd-navbar-classic" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-fixed" data-xl-layout="rd-navbar-static" data-xl-device-layout="rd-navbar-static" data-lg-stick-up-offset="61px" data-xl-stick-up-offset="61px" data-xxl-stick-up-offset="61px" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
+            <div class="rd-navbar-main-outer">
+              <div class="rd-navbar-main">
+                <!-- RD Navbar Panel-->
+                <div class="rd-navbar-panel"></div>
+                <div class="rd-navbar-nav-wrap">
+                  <!-- RD Navbar Nav-->
+                  <ul class="rd-navbar-nav">
+                    <li class="rd-nav-item
+                      {% if block('title') == "Book Gallery" %}
+                        active
+                      {% endif %}
+                    "><a class="rd-nav-link" href="/">Bookloggd</a>
+                    </li>
+                    <li class="rd-nav-item
+                     {% if block('title') == "Crear libro" %}
+                        active
+                      {% endif %}
+                     "><a class="rd-nav-link" href="/createBook">Crear libro</a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="rd-navbar-collapse-outer context-light">
+                  <button class="rd-navbar-collapse-toggle" data-multitoggle="#rd-navbar-collapse, #toggle-inner">
+                    <span class="rd-navbar-collapse-toggle-element" id="toggle-inner">
+                      <span></span>
+                    </span>
+                    {% if flashes|length > 0 %}
+                      <span class="flash-icon" id="flash-icon"></span>
+                    {% endif %}
+                  </button>
+                  <div class="rd-navbar-collapse" id="rd-navbar-collapse">
+                    <button class="rd-navbar-collapse-close" data-multitoggle="#rd-navbar-collapse"><span class="rd-navbar-collapse-toggle-element active"><span></span></span></button>
+                    <div id="flashes" class="flashes">
+                      <h1>Mensajes</h1>
+                      {% for label, messages in flashes %}
+                          {% for message in messages %}
+                              {# Flash can be either: "notice" (Información), "warning" o "success" #}
+                              <div class="flash flash-{{ label }}">
+                                  <span class="h3">{{ label|title }}:</span> {{ message }}
+                              </div>
+                          {% endfor %}
+                      {% endfor %}
+                  </div>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+
+            <div class="rd-navbar-placeholder">
+            </div>
+          </nav>
+        </div>
+        <section class="breadcrumbs-custom">
+          <div class="breadcrumbs-custom-inner">
+            <div class="container">
+              <div class="breadcrumbs-custom-main m-parallax-content">
+                <h2 class="breadcrumbs-custom-title text-uppercase">
+                  {% block secondTitle %}
+                    {{ block('title') }} 
+                  {% endblock %}
+                </h2>
+              </div>
+            </div>
+          </div>
+        </section>
+      </header>
+      
+      {% block content %}{% endblock %}
+
+      <!-- Page Footer-->
+      <footer class="section footer-classic footer-classic-md">
+        <div class="footer-classic-aside">
+      
+          <div class="container">
+            <p>
+              <a href="https://github.com/AlejandroMirallesRuiz/bookloggd"><span> Made by AlejandrosMiralles <i class="fa fa-github"></i> </span></a>
+            </p>
+            <p class="rights"><span>&copy;&nbsp; </span><span class="copyright-year"></span><span>&nbsp;</span><span>Lingvo</span><span>. All rights reserved.</span><span> Design&nbsp;by&nbsp;<a href="https://www.templatemonster.com">TemplateMonster</a></span></p>
+            <p class="rights"><a href="https://www.flickr.com/photos/wildrose115/24767545586">Banner made by Wonder woman0731 </a>. <a href="https://creativecommons.org/licenses/by/2.0/#ref-indicate-changes">  Licence CC </a></p>
+          </div>
+
+        </div>
+        
+      </footer>
+    </div>
+    <div class="snackbars" id="form-output-global"></div>
+
+    <script src="{{ asset('js/core.min.js') }}"></script>
+    <script src="{{ asset('js/script.js') }}"></script>
+    <!-- Bootstrap JS CDN (opcional, si necesitas funcionalidades de JavaScript de Bootstrap) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
   {% block javascripts %}{% endblock %}
-
-</body>
+  </body>
 </html>

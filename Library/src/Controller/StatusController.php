@@ -21,7 +21,7 @@ use DateTime;
 class StatusController extends AbstractController
 {
     private function saveImageTemporalFile($image, $fileName = "temporal"){
-        $imagesFolder = $this->getParameter('kernel.project_dir').'/public/image/';
+        $imagesFolder = $this->getParameter('kernel.project_dir').'/public/image/images/';
 
         $fileName = $fileName . ".jpg";
 
@@ -40,7 +40,7 @@ class StatusController extends AbstractController
         
         $imageFile = $this->saveImageTemporalFile($book->getPortada());
 
-        return $this->render('book/updateReadingStatus.html.twig', [
+        return $this->render('status/updateReadingStatus.html.twig', [
             'controller_name' => 'BookController',
             'book' => $book,
             'status' => $status,

@@ -3,26 +3,20 @@
 {% block title %}Book Gallery{% endblock %}
 
 {% block content %}
-    <div class="row">
-            <div class="col-md-1"></div>
-            <div class="col-12 col-md-10 ">
-                <div class="col-1"></div>
-                <div class="col-11 col-md-12 ">
-                    <div id="title" class="h1 title">Bookloggd</div>
-                </div>
 
-                <div id="filters" class="col-12 col-md-12 text-center">
-                    Filtros
-                </div>
-
-                <div class="col-12 col-md-12 " id="bookGalerys">
-                    {% if images|length > 0 %}
-                        {% for i in 0..(images|length - 1) %}
-                            <a href="book/{{ books[i].getId() }}"> <img src="{{ asset('image/' ~ images[i]) }}" class="bookGalery"/> </a>
-                        {% endfor %}
-                    {% endif %}
-                </div>
+        <section class="section section-lg bg-default">
+        <div class="container">
+          <!-- Owl Carousel-->
+            <div class="owl-carousel owl-2" data-items="1" data-sm-items="2" data-md-items="3" data-lg-items="4" data-xl-items="5" data-dots="true" data-nav="false" data-stage-padding="0" data-loop="false" data-margin="30" data-mouse-drag="false">
+            
+                {% if images|length > 0 %}
+                    {% for i in 0..(images|length - 1) %}
+                        <a class="link-image" href="book/{{ books[i].getId() }}">
+                            <img src="{{ asset('image/images/' ~ images[i]) }}" alt="" class="bookGalery" width="228" height="162"/>
+                        </a>
+                    {% endfor %}
+                {% endif %}
             </div>
-            <div class="col-md-1"></div>
         </div>
+      </section>
 {% endblock %}

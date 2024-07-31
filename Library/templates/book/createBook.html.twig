@@ -1,15 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Update Book {% endblock %}
+{% block title %}Crear libro{% endblock %}
 
 {% block content %}
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-12 col-md-10 ">
-            <div class="col-1"></div>
-            <div class="col-11 col-md-12 ">
-                <div id="title" class="h1 title">Crear libro</div>
-            </div>
 
             <div class="col-12">
                 <form action="/createBook" method="POST" enctype="multipart/form-data">
@@ -58,6 +54,7 @@
                         </div>                  
                         
                     </div>
+                    <br/>
                     <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
                 </form>
             </div>

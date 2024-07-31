@@ -23,7 +23,7 @@ class BookController extends AbstractController
 {
 
     private function saveImageTemporalFile($image, $fileName = "temporal"){
-        $imagesFolder = $this->getParameter('kernel.project_dir').'/public/image/';
+        $imagesFolder = $this->getParameter('kernel.project_dir').'/public/image/images/';
 
         $fileName = $fileName . ".jpg";
 
@@ -31,8 +31,6 @@ class BookController extends AbstractController
 
         return $fileName;
     }
-    
-
     
     #[Route('/', name: 'app_index')]
     public function index(LibroRepository $libroRepository, Request $request): Response{
@@ -50,7 +48,6 @@ class BookController extends AbstractController
             
             $images[] = $imageFile;
         }
-        
 
         return $this->render('book/index.html.twig', [
             'controller_name' => 'BookController',

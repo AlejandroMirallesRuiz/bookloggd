@@ -1,22 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Book {% endblock %}
+{% block title %}{{ book.titulo }}{% endblock %}
+
+{% block secondTitle %}
+    <div class="estado {{ status.status|lower }}">
+        <span id="title"><span class="circulo"></span>{{ book.titulo }}</span>
+        <span class="estadoName h5">{{ status.status }}</span>
+    </div>
+{% endblock %}
 
 {% block content %}
-    <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-11 estado {{ status.status|lower }}">
-            <span id="title" class="h1"><span class="circulo"></span>{{ book.titulo }}</span>
-            <span class="estadoName h5">{{ status.status }}</span>
-        </div>
-    </div>
-    
-    <br/>
     
     <div class="row media mt-3">
         <div class="col-md-1"></div>
         <div class="col-md-5 col-12 mr-3 text-center">
-            <img src="{{ asset('image/' ~ image) }}" class="book"/>
+            <img src="{{ asset('image/images/' ~ image) }}" class="book"/>
         </div>
 
 
@@ -54,8 +52,9 @@
             <a href="/updateReadingStatus/{{book.id}}" class="btn btn-primary">Actualizar lectura</a>
         </div>
         <div class="col-md-6 col-6 text-center">
-            <a href="/updateBook/{{ book.id }}" class="btn btn-secondary">Editar libro</a>
+            <a href="/updateBook/{{ book.id }}" class="btn btn-primary">Editar libro</a>
         </div>
     </div>
+
     
 {% endblock %}
