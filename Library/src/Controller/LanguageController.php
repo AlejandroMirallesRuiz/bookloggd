@@ -20,7 +20,7 @@ class LanguageController extends AbstractController
     #[Route('/createLanguage', methods: ['GET'],  name: 'app_createLanguage')]
     public function createLanguage(): Response{
 
-        return $this->render('book/createLanguage.html.twig', [
+        return $this->render('language/createLanguage.html.twig', [
             'controller_name' => 'BookController',
         ]);
     }

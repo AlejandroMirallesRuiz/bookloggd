@@ -2,20 +2,18 @@
 
 {% block title %}Update Status Reading {% endblock %}
 
+{% block secondTitle %}
+    <div class="{{ status.status|lower}}">
+        <span>Actualizar lectura</span>
+    </div>
+{% endblock %}
+
 {% block content %}
     
     <div class="row">
-        <div class="col-1"></div>
-        <div class="col-11 {{ status.status|lower}}">
-            <span class="h1">Actualizar lectura</span>
-        </div>
-    </div>
-    <br/>
-
-    <div class="row">
         <div class="col-md-1"></div>
         <div class="col-12 col-md-5 text-center">
-            <img src="{{ asset('image/' ~ image) }}" class="book"/>
+            <img src="{{ asset('image/images/' ~ image) }}" class="book"/>
         </div>
         <div class="col-12 col-md-5">
             <form action="/updateReadingStatus/{{ book.id }}" method="POST" enctype="multipart/form-data">

@@ -1,19 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Update Book {% endblock %}
+{% block title %}Update Book{% endblock %}
+
+{% block secondTitle %}
+    Actualizar libro
+{% endblock %}
 
 {% block content %}
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-12 col-md-10 ">
-            <div class="col-1"></div>
-            <div class="col-11 col-md-12 ">
-                <div id="title" class="h1 title">Actualizar libro</div>
-            </div>
-
             <div class="col-12">
                 <div class="text-center">
-                    <img src="{{ asset('image/' ~ image) }}" id="previewImage" class="bookGalery"/>
+                    <img src="{{ asset('image/images/' ~ image) }}" id="previewImage" class="bookGalery"/>
                 </div>
             </div>
 
@@ -58,7 +57,7 @@
                         <span class="h3">Portada</span>                      
                         <div class="custom-file">
                             <input name="frontPage" type="file" class="custom-file-input" id="frontPage" accept=”.jpg, .jpeg, .png” />
-                            <label class="custom-file-label" for="frontPage">Selecciona la portada</label>
+                            <label class="custom-file-label" for="frontPage">Selecciona una nueva portada</label>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>

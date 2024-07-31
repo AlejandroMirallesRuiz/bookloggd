@@ -1,0 +1,142 @@
+/* ESTADOS */
+.estado .estadoName {
+  display: none;
+}
+.estado #title:hover + .estadoName {
+  display: inline-block;
+}
+.estado .circulo {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%; /* Hace que el div sea un círculo */
+  display: inline-block; /* Para que el círculo se muestre en línea con el texto */
+}
+
+.interesado {
+  color: rgba(255, 139, 45, 0.904);
+}
+.interesado .circulo {
+  background-color: rgba(255, 139, 45, 0.904);
+}
+.interesado .estadoName {
+  color: rgba(255, 139, 45, 0.904);
+}
+
+.terminado {
+  color: rgb(61, 139, 255);
+}
+.terminado .circulo {
+  background-color: rgb(61, 139, 255);
+}
+.terminado .estadoName {
+  color: rgb(61, 139, 255);
+}
+
+.leyendo {
+  color: rgb(84, 255, 50);
+}
+.leyendo .circulo {
+  background-color: rgb(84, 255, 50);
+}
+.leyendo .estadoName {
+  color: rgb(84, 255, 50);
+}
+
+.standby {
+  color: rgb(255, 60, 118);
+}
+.standby .circulo {
+  background-color: rgb(255, 60, 118);
+}
+.standby .estadoName {
+  color: rgb(255, 60, 118);
+}
+
+.droppeado {
+  color: rgb(255, 0, 0);
+}
+.droppeado .circulo {
+  background-color: rgb(255, 0, 0);
+}
+.droppeado .estadoName {
+  color: rgb(255, 0, 0);
+}
+
+
+
+
+
+/* FLASHES */
+.flashes {
+  display: block;
+}
+.flashes .flash {
+  display: block;
+  border-style: dashed;
+}
+.flashes .flash-success {
+  color: black;
+  background-color: greenyellow;
+}
+.flashes .flash-warning {
+  color: white;
+  background-color: red;
+}
+.flashes .flash-notice {
+  color: black;
+  background-color: orange;
+}
+
+.flash-icon {
+    width: 30px;
+    height: 30px;
+    background-color: red;
+    border-radius: 50%;
+    position: relative;
+    right: 7.6em;
+    top: 0.9em;
+}
+
+@media (max-width: 991px) {
+  .flash-icon {
+    display: none;
+  }
+}
+
+.flash-icon.show {
+    display: inline-block;
+}
+
+
+
+
+/* DRAG IMAGES AREA */
+.drag-area {
+  height: 20em;
+  border: 0.3em dashed #e0eafc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0.1px auto;
+}
+.drag-area .header {
+  color: #34495e;
+}
+.drag-area .support {
+  color: gray;
+  margin: 0.1em 0 0.15em 0;
+}
+.drag-area .drag-area.active {
+  border: 0.2em solid #1683ff;
+}
+.drag-area .button {
+  font-weight: 500;
+  color: #1683ff;
+  cursor: pointer;
+}
+.drag-area img {
+  height: 15em;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
