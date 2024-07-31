@@ -4,7 +4,7 @@
 
 Crea un registro de tus lecturas, estén terminadas, abandonadas o en interés. 
 
-[Galería]
+![1984](assets/1984.JPG)
 
 ¡Además! como el programa corre en local, toda la información es completamente privada y personalizable. Añade los libros que quieras, ¡sin importar de su idioma o editorial! 
 
@@ -33,3 +33,5 @@ Finalmente corra la aplicación. Ve a la carpeta ./public y ejecute el siguiente
 	php -S localhost:8080
 
 ¡Et voilé! Si abres un navegador y escribes localhost:8080 o 127.0.0.1:8080 en la barra de búsqueda, podrás usar tu biblioteca personalizada. 
+
+![Galería](assets/Galería.JPG)
